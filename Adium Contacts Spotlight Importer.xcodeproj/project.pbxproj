@@ -18,6 +18,7 @@
 		55243CB01462FD0600878F39 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55243CAF1462FD0600878F39 /* Cocoa.framework */; };
 		55243CBA1462FD0600878F39 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55243CB81462FD0600878F39 /* InfoPlist.strings */; };
 		55243CC01462FDD900878F39 /* Adium.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55243CBF1462FDD900878F39 /* Adium.framework */; };
+		55243CC31462FE4200878F39 /* ContactsExportAdiumPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 55243CC21462FE4200878F39 /* ContactsExportAdiumPlugin.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,8 @@
 		55243CB91462FD0600878F39 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		55243CBB1462FD0600878F39 /* Adium Contacts Export Plugin-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Adium Contacts Export Plugin-Prefix.pch"; sourceTree = "<group>"; };
 		55243CBF1462FDD900878F39 /* Adium.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Adium.framework; sourceTree = "<group>"; };
+		55243CC11462FE4200878F39 /* ContactsExportAdiumPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsExportAdiumPlugin.h; sourceTree = "<group>"; };
+		55243CC21462FE4200878F39 /* ContactsExportAdiumPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsExportAdiumPlugin.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +142,8 @@
 			isa = PBXGroup;
 			children = (
 				55243CB61462FD0600878F39 /* Supporting Files */,
+				55243CC11462FE4200878F39 /* ContactsExportAdiumPlugin.h */,
+				55243CC21462FE4200878F39 /* ContactsExportAdiumPlugin.m */,
 			);
 			path = "Adium Contacts Export Plugin";
 			sourceTree = "<group>";
@@ -250,6 +255,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55243CC31462FE4200878F39 /* ContactsExportAdiumPlugin.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

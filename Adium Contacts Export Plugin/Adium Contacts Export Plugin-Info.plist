@@ -27,6 +27,6 @@
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2011 __MyCompanyName__. All rights reserved.</string>
 	<key>NSPrincipalClass</key>
-	<string>ContactsExporterAdiumPlugin</string>
+	<string>ContactsExportAdiumPlugin</string>
 </dict>
 </plist>

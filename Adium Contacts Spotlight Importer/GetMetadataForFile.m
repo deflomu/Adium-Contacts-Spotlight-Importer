@@ -8,7 +8,7 @@
 
 #include <CoreFoundation/CoreFoundation.h>
 #import <CoreData/CoreData.h>
-#import "MySpotlightImporter.h"
+#import "AdiumContactSpotlightImporter.h"
 
 Boolean GetMetadataForFile(void *thisInterface, CFMutableDictionaryRef attributes, CFStringRef contentTypeUTI, CFStringRef pathToFile);
 
@@ -58,7 +58,7 @@ Boolean GetMetadataForFile(void *thisInterface, CFMutableDictionaryRef attribute
         } else if ([(__bridge NSString *)contentTypeUTI isEqualToString:@"YOUR_EXTERNAL_RECORD_UTI"]) {
             // import from an external record file
             
-            MySpotlightImporter *importer = [[MySpotlightImporter alloc] init];
+            AdiumContactSpotlightImporter *importer = [[AdiumContactSpotlightImporter alloc] init];
             
             ok = [importer importFileAtPath:(__bridge NSString *)pathToFile attributes:(__bridge NSMutableDictionary *)attributes error:&error];
         }

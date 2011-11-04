@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		292A701C14642FA90036109B /* Adium.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 292A701B14642FA90036109B /* Adium.xcdatamodel */; };
+		292A70241464306E0036109B /* Adium.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 292A701B14642FA90036109B /* Adium.xcdatamodel */; };
+		292A702B146432250036109B /* AdiumContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 292A702A146432250036109B /* AdiumContact.m */; };
+		292A702C146432250036109B /* AdiumContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 292A702A146432250036109B /* AdiumContact.m */; };
 		55243C8F1462FC7B00878F39 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55243C8E1462FC7B00878F39 /* CoreServices.framework */; };
 		55243C911462FC7B00878F39 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55243C901462FC7B00878F39 /* CoreFoundation.framework */; };
 		55243C931462FC7B00878F39 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55243C921462FC7B00878F39 /* CoreData.framework */; };
@@ -22,6 +26,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		292A701B14642FA90036109B /* Adium.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; name = Adium.xcdatamodel; path = "Adium Contacts Spotlight Importer/Adium.xcdatamodeld/Adium.xcdatamodel"; sourceTree = "<group>"; };
+		292A7029146432250036109B /* AdiumContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdiumContact.h; path = Common/AdiumContact.h; sourceTree = "<group>"; };
+		292A702A146432250036109B /* AdiumContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AdiumContact.m; path = Common/AdiumContact.m; sourceTree = "<group>"; };
 		55243C8B1462FC7B00878F39 /* Adium Contacts Spotlight Importer.mdimporter */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Adium Contacts Spotlight Importer.mdimporter"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55243C8E1462FC7B00878F39 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		55243C901462FC7B00878F39 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -72,9 +79,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		292A70221464303D0036109B /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				292A7029146432250036109B /* AdiumContact.h */,
+				292A702A146432250036109B /* AdiumContact.m */,
+				292A7023146430510036109B /* Supporting Files */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		292A7023146430510036109B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				292A701B14642FA90036109B /* Adium.xcdatamodel */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		55243C801462FC7B00878F39 = {
 			isa = PBXGroup;
 			children = (
+				292A70221464303D0036109B /* Common */,
 				55243C961462FC7B00878F39 /* Adium Contacts Spotlight Importer */,
 				55243CB51462FD0600878F39 /* Adium Contacts Export Plugin */,
 				55243C8D1462FC7B00878F39 /* Frameworks */,
@@ -248,6 +274,8 @@
 				55243C9D1462FC7B00878F39 /* main.c in Sources */,
 				55243C9F1462FC7B00878F39 /* GetMetadataForFile.m in Sources */,
 				55243CA21462FC7B00878F39 /* MySpotlightImporter.m in Sources */,
+				292A701C14642FA90036109B /* Adium.xcdatamodel in Sources */,
+				292A702B146432250036109B /* AdiumContact.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +284,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				55243CC31462FE4200878F39 /* ContactsExportAdiumPlugin.m in Sources */,
+				292A70241464306E0036109B /* Adium.xcdatamodel in Sources */,
+				292A702C146432250036109B /* AdiumContact.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +439,7 @@
 				55243CA91462FC7B00878F39 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		55243CBC1462FD0600878F39 /* Build configuration list for PBXNativeTarget "Adium Contacts Export Plugin" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +448,7 @@
 				55243CBE1462FD0600878F39 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

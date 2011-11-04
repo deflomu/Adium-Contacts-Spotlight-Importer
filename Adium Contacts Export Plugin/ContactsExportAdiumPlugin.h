@@ -9,6 +9,11 @@
 #import <Cocoa/Cocoa.h>
 #import <Adium/AIPlugin.h>
 
-@interface ContactsExportAdiumPlugin : NSObject <AIPlugin>
+#define EXPORTED_CONTACTS_DIRECTORY @"Exported Contacts"
+#define EXPORTED_CONTACT_EXTENSION @"adiumContact"
+
+@interface ContactsExportAdiumPlugin : NSObject <AIPlugin> {
+    NSString *path;
+}
 
 @end

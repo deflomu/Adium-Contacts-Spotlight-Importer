@@ -3,7 +3,7 @@
     <entity name="Contact" representedClassName="" syncable="YES">
         <attribute name="displayName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="ownDisplayName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="uid" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="Integer 64" defaultValueString="0" spotlightIndexingEnabled="YES" syncable="YES"/>
         <attribute name="userIcon" optional="YES" attributeType="Transformable" valueTransformerName="NSImageRep" syncable="YES"/>
     </entity>
     <elements>

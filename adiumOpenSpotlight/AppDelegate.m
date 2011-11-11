@@ -8,8 +8,8 @@
 
 #define EXTERNAL_RECORD_EXTENSION @"adiumContact"
 
-#import "AppDelegate.h"
 #import "AdiumContact.h"
+#import "AppDelegate.h"
 
 @implementation AppDelegate
 
@@ -37,8 +37,16 @@
 
                 AdiumContact *contact = mo;
                 
+                if (!contact.accountName || !contact.uid)
+                    return;
+                //FIXME add parameters like [NSString stringWithFormat]
+                NSString *myScript =   @"tell application \"Adium\"
+                                            "tell account \"%@\" to make new chat with contacts {contact \"%@\"} with new chat window\n"
+                                            "activate\n"
+                                        "end tell";
+                NSAppleScript *script = [[NSAppleScript alloc] initWithSource:myScript];
                 
-                
+                [script executeAndReturnError:nil];
             }
         }
     }

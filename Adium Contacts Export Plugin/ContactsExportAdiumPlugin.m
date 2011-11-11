@@ -171,6 +171,7 @@
         contactToSave.ownDisplayName = contact.ownDisplayName;
         contactToSave.displayName = contact.displayName;
         contactToSave.userIcon = contact.userIconData;
+        contactToSave.accountName = contact.account.UID;
     }
     
     [self saveData];

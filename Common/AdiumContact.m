@@ -11,6 +11,7 @@
 
 @implementation AdiumContact
 
+@dynamic accountName;
 @dynamic displayName;
 @dynamic ownDisplayName;
 @dynamic uid;

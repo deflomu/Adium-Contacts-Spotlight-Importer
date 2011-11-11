@@ -12,6 +12,7 @@
 
 @interface AdiumContact : NSManagedObject
 
+@property (nonatomic, retain) NSString * accountName;
 @property (nonatomic, retain) NSString * displayName;
 @property (nonatomic, retain) NSString * ownDisplayName;
 @property (nonatomic, retain) NSString * uid;

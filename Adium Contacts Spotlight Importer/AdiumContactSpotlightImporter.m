@@ -56,6 +56,10 @@
 
         [spotlightData setObject:nickname forKey:(NSString *)kMDItemDisplayName];
         
+        [spotlightData setObject:nickname forKey:(NSString *)kMDItemTitle];
+        
+        [spotlightData setObject:@"Adium Contact" forKey:(NSString *)kMDItemKind];
+        
          /*
             Determine how you want to store the instance information in 'spotlightData' dictionary.
             For each property, pick the key kMDItem... from MDItem.h that best fits its content.  

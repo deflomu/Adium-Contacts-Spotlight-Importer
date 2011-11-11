@@ -14,7 +14,7 @@
 
 @property (nonatomic, retain) NSString * displayName;
 @property (nonatomic, retain) NSString * ownDisplayName;
-@property (nonatomic, retain) NSNumber * uid;
+@property (nonatomic, retain) NSString * uid;
 @property (nonatomic, retain) id userIcon;
 
 @end

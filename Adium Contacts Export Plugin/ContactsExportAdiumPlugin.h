@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import <Adium/AIPlugin.h>
+#import "CommonHeaders.h"
 
 #define EXPORTED_CONTACTS_DIRECTORY @"Exported Contacts"
 #define EXPORTED_CONTACT_EXTENSION @"adiumContact"
@@ -15,5 +16,9 @@
 @interface ContactsExportAdiumPlugin : NSObject <AIPlugin> {
     NSString *path;
 }
+
+@property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
+@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end

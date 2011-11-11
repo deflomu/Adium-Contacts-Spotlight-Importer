@@ -18,6 +18,8 @@
 
 @implementation ContactsExportAdiumPlugin
 
+@synthesize path;
+
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
 @synthesize managedObjectModel = __managedObjectModel;
 @synthesize managedObjectContext = __managedObjectContext;
@@ -29,8 +31,12 @@
     if (__managedObjectModel) {
         return __managedObjectModel;
     }
-	
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Adium" withExtension:@"mom"];
+    
+    NSArray *pluginsPaths = AISearchPathForDirectories(AIPluginsDirectory);
+    
+    NSBundle *myBundle = [NSBundle bundleWithPath:[NSString stringWithFormat:@"%@/Adium Contacts Export Plugin.AdiumPlugin", [pluginsPaths objectAtIndex:0]]];
+    
+    NSURL *modelURL = [myBundle URLForResource:@"Adium" withExtension:@"mom"];
     __managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];    
     return __managedObjectModel;
 }
@@ -50,7 +56,7 @@
     }
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSURL *applicationFilesDirectory = [NSURL URLWithString:path];
+    NSURL *applicationFilesDirectory = [NSURL fileURLWithPath:self.path];
     NSError *error = nil;
     
     NSDictionary *properties = [applicationFilesDirectory resourceValuesForKeys:[NSArray arrayWithObject:NSURLIsDirectoryKey] error:&error];
@@ -130,7 +136,7 @@
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accountsConnected:) name:ACCOUNT_CONNECTED object:nil];
     
-    path = [adium createResourcePathForName:EXPORTED_CONTACTS_DIRECTORY];
+    self.path = [adium createResourcePathForName:EXPORTED_CONTACTS_DIRECTORY];
 }
 
 - (void)uninstallPlugin

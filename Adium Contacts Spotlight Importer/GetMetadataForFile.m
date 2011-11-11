@@ -7,8 +7,8 @@
 //
 
 #define INFO @"contact"
-#define STORE_FILE_UTI @"net.skweez.spotlight.importer.adium"
-#define EXTERNAL_RECORD_UTI @"net.skweez.spotlight.importer.adium.contact"
+#define STORE_FILE_UTI @"net.skweez.adium"
+#define EXTERNAL_RECORD_UTI @"net.skweez.adium.contact"
 #define EXTERNAL_RECORD_EXTENSION @"adiumContact"
 
 #include <CoreFoundation/CoreFoundation.h>

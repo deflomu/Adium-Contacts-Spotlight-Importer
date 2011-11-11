@@ -86,8 +86,22 @@
     }
     
     NSURL *url = [applicationFilesDirectory URLByAppendingPathComponent:@"AdiumContacts.storedata"];
+    
+    NSString *externalRecordsSupportFolder = [@"~/Library/Caches/Metadata/CoreData/AdiumContacts/" stringByExpandingTildeInPath];
+    
+    [fileManager createDirectoryAtPath:externalRecordsSupportFolder withIntermediateDirectories:YES attributes:nil error:&error];
+    
+    if (error) {
+        [[NSApplication sharedApplication] presentError:error];
+    }
+    
+    NSMutableDictionary *storeOptions = [[NSMutableDictionary alloc] init];
+    [storeOptions setObject:@"adiumContact" forKey:NSExternalRecordExtensionOption];
+    [storeOptions setObject:externalRecordsSupportFolder forKey:NSExternalRecordsDirectoryOption];
+    [storeOptions setObject:NSBinaryExternalRecordType forKey:NSExternalRecordsFileFormatOption];
+    
     NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:mom];
-    if (![coordinator addPersistentStoreWithType:NSXMLStoreType configuration:nil URL:url options:nil error:&error]) {
+    if (![coordinator addPersistentStoreWithType:NSXMLStoreType configuration:nil URL:url options:storeOptions error:&error]) {
         [[NSApplication sharedApplication] presentError:error];
         return nil;
     }
@@ -150,7 +164,9 @@
     allContacts = [[adium contactController] allContacts];
     
     for (AIListContact *contact in allContacts) {
-        contactToSave = [[AdiumContact alloc] init];
+        NSLog(@"%@", contact.UID);
+        
+        contactToSave = [NSEntityDescription insertNewObjectForEntityForName:@"Contact" inManagedObjectContext:self.managedObjectContext];
         contactToSave.uid = contact.UID;
         contactToSave.ownDisplayName = contact.ownDisplayName;
         contactToSave.displayName = contact.displayName;

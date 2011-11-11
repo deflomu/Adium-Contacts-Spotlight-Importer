@@ -4,7 +4,7 @@
         <attribute name="displayName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="ownDisplayName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uid" optional="YES" attributeType="String" spotlightIndexingEnabled="YES" syncable="YES"/>
-        <attribute name="userIcon" optional="YES" attributeType="Transformable" valueTransformerName="NSImageRep" syncable="YES"/>
+        <attribute name="userIcon" optional="YES" attributeType="Binary" valueTransformerName="NSImageRep" syncable="YES"/>
     </entity>
     <elements>
         <element name="Contact" positionX="-4356" positionY="-5796" width="128" height="105"/>

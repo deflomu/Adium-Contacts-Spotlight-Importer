@@ -6,9 +6,11 @@
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "AdiumContactSpotlightImporter.h"
+#define STORE_TYPE NSXMLStoreType
+#define ENTITY_CONTACT_NAME @"Contact"
 
-#define YOUR_STORE_TYPE NSXMLStoreType
+#import "AdiumContactSpotlightImporter.h"
+#import "AdiumContact.h"
 
 @interface AdiumContactSpotlightImporter ()
 @property (nonatomic, strong) NSURL *modelURL;
@@ -44,12 +46,16 @@
 
     // how you process each instance will depend on the entity that the instance belongs to
 
-    if ([[[instance entity] name] isEqualToString:@"YOUR_ENTITY_NAME"]) {
+    if ([[[instance entity] name] isEqualToString:ENTITY_CONTACT_NAME]) {
 
         // set the display name for Spotlight search result
+        NSString *nickname = [instance valueForKey:@"ownDisplayName"];
+        if (!nickname)
+            nickname = [instance valueForKey:@"displayName"];
+        if (!nickname)
+            return NO;
 
-        NSString *yourDisplayString =  [NSString stringWithFormat:@"YOUR_DISPLAY_STRING %@", [instance valueForKey:@"SOME_KEY"]]; 
-        [spotlightData setObject:yourDisplayString forKey:(NSString *)kMDItemDisplayName];
+        [spotlightData setObject:nickname forKey:(NSString *)kMDItemDisplayName];
         
          /*
             Determine how you want to store the instance information in 'spotlightData' dictionary.
@@ -125,7 +131,7 @@ static NSDate				*cachedModelModificationDate =nil;
     NSError *error = nil;
         
     __persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    if (![__persistentStoreCoordinator addPersistentStoreWithType:YOUR_STORE_TYPE configuration:nil URL:self.storeURL options:nil error:&error]) {
+    if (![__persistentStoreCoordinator addPersistentStoreWithType:STORE_TYPE configuration:nil URL:self.storeURL options:nil error:&error]) {
         NSLog(@"%@:%@ unable to add persistent store coordinator - %@", [self class], NSStringFromSelector(_cmd), error);
     }    
 

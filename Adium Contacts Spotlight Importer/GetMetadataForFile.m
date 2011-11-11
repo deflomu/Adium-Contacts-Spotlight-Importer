@@ -6,6 +6,11 @@
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
+#define INFO @"contact"
+#define STORE_FILE_UTI @"net.skweez.spotlight.importer.adium"
+#define EXTERNAL_RECORD_UTI @"net.skweez.spotlight.importer.adium.contact"
+#define EXTERNAL_RECORD_EXTENSION @"adiumContact"
+
 #include <CoreFoundation/CoreFoundation.h>
 #import <CoreData/CoreData.h>
 #import "AdiumContactSpotlightImporter.h"
@@ -35,9 +40,11 @@ Boolean GetMetadataForFile(void *thisInterface, CFMutableDictionaryRef attribute
     @autoreleasepool {
         NSError *error = nil;
         
-        if ([(__bridge NSString *)contentTypeUTI isEqualToString:@"YOUR_STORE_FILE_UTI"]) {
+        /*
+        if ([(__bridge NSString *)contentTypeUTI isEqualToString:STORE_FILE_UTI]) {
+             * For now,we do not care for the core data store database
+             
             // import from store file metadata
-            
             // Create the URL, then attempt to get the meta-data from the store
             NSURL *url = [NSURL fileURLWithPath:(__bridge NSString *)pathToFile];
             NSDictionary *metadata = [NSPersistentStoreCoordinator metadataForPersistentStoreOfType:nil URL:url error:&error];
@@ -47,7 +54,7 @@ Boolean GetMetadataForFile(void *thisInterface, CFMutableDictionaryRef attribute
                 // Get the information you are interested in from the dictionary
                 // "YOUR_INFO" should be replaced by key(s) you are interested in
                 
-                NSObject *contentToIndex = [metadata objectForKey:@"YOUR_INFO"];
+                NSObject *contentToIndex = [metadata objectForKey:INFO];
                 if (contentToIndex != nil) {
                     // Add the metadata to the text content for indexing
                     [(__bridge NSMutableDictionary *)attributes setObject:contentToIndex forKey:(NSString *)kMDItemTextContent];
@@ -55,7 +62,9 @@ Boolean GetMetadataForFile(void *thisInterface, CFMutableDictionaryRef attribute
                 }
             }
             
-        } else if ([(__bridge NSString *)contentTypeUTI isEqualToString:@"YOUR_EXTERNAL_RECORD_UTI"]) {
+         } else 
+         */
+        if ([(__bridge NSString *)contentTypeUTI isEqualToString:EXTERNAL_RECORD_UTI]) {
             // import from an external record file
             
             AdiumContactSpotlightImporter *importer = [[AdiumContactSpotlightImporter alloc] init];

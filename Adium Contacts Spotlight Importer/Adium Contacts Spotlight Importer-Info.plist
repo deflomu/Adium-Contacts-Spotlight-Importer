@@ -11,7 +11,7 @@
 			<string>MDImporter</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>YOUR_EXTERNAL_RECORD_UTI</string>
+				<string>net.skweez.adium.contact</string>
 			</array>
 		</dict>
 	</array>

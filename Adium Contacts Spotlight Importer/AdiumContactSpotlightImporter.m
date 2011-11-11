@@ -6,7 +6,6 @@
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
-#define STORE_TYPE NSXMLStoreType
 #define ENTITY_CONTACT_NAME @"Contact"
 
 #import "AdiumContactSpotlightImporter.h"

@@ -38,7 +38,7 @@
 		55243C9A1462FC7B00878F39 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		55243C9C1462FC7B00878F39 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		55243C9E1462FC7B00878F39 /* GetMetadataForFile.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetMetadataForFile.m; sourceTree = "<group>"; };
-		55243CA01462FC7B00878F39 /* AdiumContactSpotlightImporter.h */ = {isa = PBXFileReference; path = AdiumContactSpotlightImporter.h; sourceTree = "<group>"; };
+		55243CA01462FC7B00878F39 /* AdiumContactSpotlightImporter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdiumContactSpotlightImporter.h; sourceTree = "<group>"; };
 		55243CA11462FC7B00878F39 /* AdiumContactSpotlightImporter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdiumContactSpotlightImporter.m; sourceTree = "<group>"; };
 		55243CA31462FC7B00878F39 /* Importer Read Me.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Importer Read Me.txt"; sourceTree = "<group>"; };
 		55243CA41462FC7B00878F39 /* Adium Contacts Spotlight Importer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Adium Contacts Spotlight Importer-Prefix.pch"; sourceTree = "<group>"; };
@@ -53,6 +53,7 @@
 		55243CBF1462FDD900878F39 /* Adium.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Adium.framework; sourceTree = "<group>"; };
 		55243CC11462FE4200878F39 /* ContactsExportAdiumPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsExportAdiumPlugin.h; sourceTree = "<group>"; };
 		55243CC21462FE4200878F39 /* ContactsExportAdiumPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsExportAdiumPlugin.m; sourceTree = "<group>"; };
+		55ACA492146D36050078E418 /* CommonHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonHeaders.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +86,7 @@
 				292A7029146432250036109B /* AdiumContact.h */,
 				292A702A146432250036109B /* AdiumContact.m */,
 				292A7023146430510036109B /* Supporting Files */,
+				55ACA492146D36050078E418 /* CommonHeaders.h */,
 			);
 			name = Common;
 			sourceTree = "<group>";

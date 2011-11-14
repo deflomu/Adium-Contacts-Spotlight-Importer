@@ -24,11 +24,56 @@
 	<string>1</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
+	<key>LSUIElement</key>
+	<true/>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2011 __MyCompanyName__. All rights reserved.</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>An Adium contact</string>
+			<key>UTTypeIdentifier</key>
+			<string>net.skweez.adium.contact</string>
+			<key>UTTypeReferenceURL</key>
+			<string>http://www.company.com/yourproduct</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>com.apple.ostype</key>
+				<string>XXXX</string>
+				<key>public.filename-extension</key>
+				<array>
+					<string>adiumContact</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>Adium Contact</string>
+			<key>LSHandlerRank</key>
+			<string>Owner</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>adiumContact</string>
+			</array>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>net.skweez.adium.contact</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

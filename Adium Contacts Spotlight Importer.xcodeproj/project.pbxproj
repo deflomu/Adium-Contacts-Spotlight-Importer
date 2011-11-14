@@ -27,6 +27,9 @@
 		55243CBA1462FD0600878F39 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55243CB81462FD0600878F39 /* InfoPlist.strings */; };
 		55243CC01462FDD900878F39 /* Adium.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55243CBF1462FDD900878F39 /* Adium.framework */; };
 		55243CC31462FE4200878F39 /* ContactsExportAdiumPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 55243CC21462FE4200878F39 /* ContactsExportAdiumPlugin.m */; };
+		5549385C14717F3500D64024 /* AdiumContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 292A702A146432250036109B /* AdiumContact.m */; };
+		55EE09BC1471672100CF038D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EE09BB1471672100CF038D /* MainMenu.xib */; };
+		55EE09C1147176A100CF038D /* Adium.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 292A701B14642FA90036109B /* Adium.xcdatamodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +68,7 @@
 		55243CC11462FE4200878F39 /* ContactsExportAdiumPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsExportAdiumPlugin.h; sourceTree = "<group>"; };
 		55243CC21462FE4200878F39 /* ContactsExportAdiumPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsExportAdiumPlugin.m; sourceTree = "<group>"; };
 		55ACA492146D36050078E418 /* CommonHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonHeaders.h; sourceTree = "<group>"; };
+		55EE09BB1471672100CF038D /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +139,7 @@
 				29F4EC35146D9A3D00E5B628 /* InfoPlist.strings */,
 				29F4EC38146D9A3D00E5B628 /* main.m */,
 				29F4EC3A146D9A3D00E5B628 /* adiumOpenSpotlight-Prefix.pch */,
+				55EE09BB1471672100CF038D /* MainMenu.xib */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -315,6 +320,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				29F4EC37146D9A3D00E5B628 /* InfoPlist.strings in Resources */,
+				55EE09BC1471672100CF038D /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,7 +348,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				29F4EC39146D9A3D00E5B628 /* main.m in Sources */,
+				5549385C14717F3500D64024 /* AdiumContact.m in Sources */,
 				29F4EC40146D9A3D00E5B628 /* AppDelegate.m in Sources */,
+				55EE09C1147176A100CF038D /* Adium.xcdatamodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

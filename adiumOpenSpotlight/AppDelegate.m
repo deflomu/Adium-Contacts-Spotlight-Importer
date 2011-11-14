@@ -10,27 +10,41 @@
 
 #import "AdiumContact.h"
 #import "AppDelegate.h"
+#import "CommonHeaders.h"
 
+@interface AppDelegate ()
+@property (nonatomic, strong) NSURL *modelURL;
+@property (nonatomic, strong) NSURL *storeURL;
+@end
 
 @implementation AppDelegate
 
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
 @synthesize managedObjectModel = __managedObjectModel;
 @synthesize managedObjectContext = __managedObjectContext;
+@synthesize modelURL = _modelURL;
+@synthesize storeURL = _storeURL;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    // Insert code here to initialize your application
+
+    [[NSApplication sharedApplication] terminate:self];
+
 }
 
 - (void)application:(NSApplication *)theApplication openFiles:(NSArray *)files
 {
     NSString *aPath = [files lastObject]; // just an example to get at one of the paths
     if (aPath && [aPath hasSuffix:EXTERNAL_RECORD_EXTENSION]) {
+        
+        NSDictionary *pathInfo = [NSPersistentStoreCoordinator elementsDerivedFromExternalRecordURL:[NSURL fileURLWithPath:aPath]];
+        
+        self.modelURL = [NSURL fileURLWithPath:[pathInfo valueForKey:NSModelPathKey]];
+        self.storeURL = [NSURL fileURLWithPath:[pathInfo valueForKey:NSStorePathKey]];
+        
         // decode URI from path
-        NSURL *objectURI = [[NSPersistentStoreCoordinator 
-                             elementsDerivedFromExternalRecordURL:[NSURL fileURLWithPath:aPath]] 
-                            objectForKey:NSObjectURIKey];
+        NSURL *objectURI = [pathInfo valueForKey:NSObjectURIKey];
+        
         if (objectURI) {
             NSManagedObjectID *moid = [[self persistentStoreCoordinator] 
                                        managedObjectIDForURIRepresentation:objectURI];
@@ -44,7 +58,7 @@
                 if (!contact.accountName || !contact.uid)
                     return;
                 //FIXME add parameters like [NSString stringWithFormat]
-                NSString *myScript =   [NSString stringWithFormat:@"tell application \"Adium\""
+                NSString *myScript =   [NSString stringWithFormat:@"tell application \"Adium\"\n"
                                             "tell account \"%@\" to make new chat with contacts {contact \"%@\"} with new chat window\n"
                                             "activate\n"
                                         "end tell", contact.accountName, contact.uid];
@@ -57,123 +71,87 @@
 }
 
 /**
- Creates if necessary and returns the managed object model for the application.
+ Returns the managed object model. 
+ The last read model is cached in a global variable and reused
+ if the URL and modification date are identical
  */
-- (NSManagedObjectModel *)managedObjectModel {
-    if (__managedObjectModel) {
-        return __managedObjectModel;
-    }
-    
-    NSBundle *myBundle = [NSBundle mainBundle];
-    
-    NSURL *modelURL = [myBundle URLForResource:@"Adium" withExtension:@"mom"];
-    __managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];    
-    return __managedObjectModel;
+static NSURL				*cachedModelURL = nil;
+static NSManagedObjectModel *cachedModel = nil;
+static NSDate				*cachedModelModificationDate =nil;
+
+- (NSManagedObjectModel *)managedObjectModel
+{
+    if (__managedObjectModel != nil) return __managedObjectModel;
+	
+	NSDictionary *modelFileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:[self.modelURL path] error:nil];
+	NSDate *modelModificationDate =  [modelFileAttributes objectForKey:NSFileModificationDate];
+	
+	if ([cachedModelURL isEqual:self.modelURL] && [modelModificationDate isEqualToDate:cachedModelModificationDate]) {
+		__managedObjectModel = cachedModel;
+	} 	
+	
+	if (!__managedObjectModel) {
+		__managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:self.modelURL];
+        
+		if (!__managedObjectModel) {
+			NSLog(@"%@:%@ unable to load model at URL %@", [self class], NSStringFromSelector(_cmd), self.modelURL);
+			return nil;
+		}
+        
+		// Clear out all custom classes used by the model to avoid having to link them
+		// with the importer. Remove this code if you need to access your custom logic.
+		NSString *managedObjectClassName = [NSManagedObject className];
+		for (NSEntityDescription *entity in __managedObjectModel) {
+			[entity setManagedObjectClassName:managedObjectClassName];
+		}
+		
+		// cache last loaded model
+        
+		cachedModelURL = self.modelURL;
+		cachedModel = __managedObjectModel;
+		cachedModelModificationDate = modelModificationDate;
+	}
+	
+	return __managedObjectModel;
 }
 
 /**
- Returns the persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it. (The directory for the store is created, if necessary.)
+ Returns the persistent store coordinator for the importer.  
  */
-- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
-    if (__persistentStoreCoordinator) {
-        return __persistentStoreCoordinator;
-    }
+
+- (NSPersistentStoreCoordinator *)persistentStoreCoordinator
+{
+    if (__persistentStoreCoordinator) return __persistentStoreCoordinator;
     
-    NSManagedObjectModel *mom = [self managedObjectModel];
-    if (!mom) {
-        NSLog(@"%@:%@ No model to generate a store from", [self class], NSStringFromSelector(_cmd));
-        return nil;
-    }
-    
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSURL *applicationFilesDirectory = [[NSBundle mainBundle] bundleURL];
     NSError *error = nil;
     
-    NSDictionary *properties = [applicationFilesDirectory resourceValuesForKeys:[NSArray arrayWithObject:NSURLIsDirectoryKey] error:&error];
-    
-    if (!properties) {
-        BOOL ok = NO;
-        if ([error code] == NSFileReadNoSuchFileError) {
-            ok = [fileManager createDirectoryAtPath:[applicationFilesDirectory path] withIntermediateDirectories:YES attributes:nil error:&error];
-        }
-        if (!ok) {
-            [[NSApplication sharedApplication] presentError:error];
-            return nil;
-        }
-    }
-    else {
-        if ([[properties objectForKey:NSURLIsDirectoryKey] boolValue] != YES) {
-            // Customize and localize this error.
-            NSString *failureDescription = [NSString stringWithFormat:@"Expected a folder to store application data, found a file (%@).", [applicationFilesDirectory path]]; 
-            
-            NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-            [dict setValue:failureDescription forKey:NSLocalizedDescriptionKey];
-            error = [NSError errorWithDomain:@"YOUR_ERROR_DOMAIN" code:101 userInfo:dict];
-            
-            [[NSApplication sharedApplication] presentError:error];
-            return nil;
-        }
-    }
-    
-    NSURL *url = [applicationFilesDirectory URLByAppendingPathComponent:@"AdiumContacts.storedata"];
-    
-    NSString *externalRecordsSupportFolder = [@"~/Library/Caches/Metadata/CoreData/AdiumContacts/" stringByExpandingTildeInPath];
-    
-    [fileManager createDirectoryAtPath:externalRecordsSupportFolder withIntermediateDirectories:YES attributes:nil error:&error];
-    
-    if (error) {
-        [[NSApplication sharedApplication] presentError:error];
-    }
-    
-    NSMutableDictionary *storeOptions = [[NSMutableDictionary alloc] init];
-    [storeOptions setObject:@"adiumContact" forKey:NSExternalRecordExtensionOption];
-    [storeOptions setObject:externalRecordsSupportFolder forKey:NSExternalRecordsDirectoryOption];
-    [storeOptions setObject:NSBinaryExternalRecordType forKey:NSExternalRecordsFileFormatOption];
-    
-    NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:mom];
-    if (![coordinator addPersistentStoreWithType:NSXMLStoreType configuration:nil URL:url options:storeOptions error:&error]) {
-        [[NSApplication sharedApplication] presentError:error];
-        return nil;
-    }
-    __persistentStoreCoordinator = coordinator;
+    __persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+    if (![__persistentStoreCoordinator addPersistentStoreWithType:STORE_TYPE configuration:nil URL:self.storeURL options:nil error:&error]) {
+        NSLog(@"%@:%@ unable to add persistent store coordinator - %@", [self class], NSStringFromSelector(_cmd), error);
+    }    
     
     return __persistentStoreCoordinator;
 }
 
 /**
- Returns the managed object context for the application (which is already
- bound to the persistent store coordinator for the application.) 
+ Returns the managed object context for the importer; already
+ bound to the persistent store coordinator. 
  */
-- (NSManagedObjectContext *)managedObjectContext {
-    if (__managedObjectContext) {
-        return __managedObjectContext;
-    }
+
+- (NSManagedObjectContext *)managedObjectContext
+{
+    if (__managedObjectContext) return __managedObjectContext;
     
     NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-    if (!coordinator) {
-        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        [dict setValue:@"Failed to initialize the store" forKey:NSLocalizedDescriptionKey];
-        [dict setValue:@"There was an error building up the data file." forKey:NSLocalizedFailureReasonErrorKey];
-        NSError *error = [NSError errorWithDomain:@"YOUR_ERROR_DOMAIN" code:9999 userInfo:dict];
-        [[NSApplication sharedApplication] presentError:error];
-        return nil;
-    }
-    __managedObjectContext = [[NSManagedObjectContext alloc] init];
-    [__managedObjectContext setPersistentStoreCoordinator:coordinator];
+	if (!coordinator) {
+        NSLog(@"%@:%@ unable to get persistent store coordinator", [self class], NSStringFromSelector(_cmd));
+		return nil;
+	}
+    
+	__managedObjectContext = [[NSManagedObjectContext alloc] init];
+	[__managedObjectContext setPersistentStoreCoordinator:coordinator];
     
     return __managedObjectContext;
-}
-
-- (void)saveData {
-    NSError *error = nil;
-    
-    if (![[self managedObjectContext] commitEditing]) {
-        NSLog(@"%@:%@ unable to commit editing before saving", [self class], NSStringFromSelector(_cmd));
-    }
-    
-    if (![[self managedObjectContext] save:&error]) {
-        [[NSApplication sharedApplication] presentError:error];
-    }
 }
 
 @end

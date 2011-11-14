@@ -15,9 +15,12 @@
 
 @interface ContactsExportAdiumPlugin : NSObject <AIPlugin> {
     NSString *path;
+    
+    NSString *externalRecordsSupportFolder;
 }
 
 @property (retain) NSString *path;
+@property (retain) NSString *externalRecordsSupportFolder;
 
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;

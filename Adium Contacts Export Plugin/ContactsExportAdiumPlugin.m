@@ -18,7 +18,7 @@
 
 @implementation ContactsExportAdiumPlugin
 
-@synthesize path;
+@synthesize path, externalRecordsSupportFolder;
 
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
 @synthesize managedObjectModel = __managedObjectModel;
@@ -87,7 +87,7 @@
     
     NSURL *url = [applicationFilesDirectory URLByAppendingPathComponent:@"AdiumContacts.storedata"];
     
-    NSString *externalRecordsSupportFolder = [@"~/Library/Caches/Metadata/CoreData/AdiumContacts/" stringByExpandingTildeInPath];
+    self.externalRecordsSupportFolder = [@"~/Library/Caches/Metadata/CoreData/AdiumContacts/" stringByExpandingTildeInPath];
     
     [fileManager createDirectoryAtPath:externalRecordsSupportFolder withIntermediateDirectories:YES attributes:nil error:&error];
     
@@ -137,6 +137,12 @@
 - (void)saveData {
     NSError *error = nil;
     
+    /*NSFileManager *fm = [NSFileManager defaultManager];
+    
+    if (![fm removeItemAtPath:self.externalRecordsSupportFolder error:&error]) {
+        [[NSApplication sharedApplication] presentError:error];
+    }*/
+    
     if (![[self managedObjectContext] commitEditing]) {
         NSLog(@"%@:%@ unable to commit editing before saving", [self class], NSStringFromSelector(_cmd));
     }
@@ -161,10 +167,27 @@
 - (void) accountsConnected:(NSNotification *)aNotification {
     NSArray *allContacts = nil;
     AdiumContact *contactToSave = nil;
+    NSEntityDescription *entityDescription = nil;
+    NSFetchRequest *request = nil;
+    NSPredicate *predicate = nil;
+    NSArray *existingContacts = nil;
+    NSError *error;
+    
     allContacts = [[adium contactController] allContacts];
     
+    entityDescription = [NSEntityDescription entityForName:@"Contact" inManagedObjectContext:self.managedObjectContext];
+    request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDescription];
+    
     for (AIListContact *contact in allContacts) {
-        NSLog(@"%@", contact.UID);
+        
+        predicate = [NSPredicate predicateWithFormat:@"uid == %@", contact.UID];
+        [request setPredicate:predicate];
+        existingContacts = [self.managedObjectContext executeFetchRequest:request error:&error];
+        
+        if (existingContacts.count >= 1) {
+            continue;
+        }
         
         contactToSave = [NSEntityDescription insertNewObjectForEntityForName:@"Contact" inManagedObjectContext:self.managedObjectContext];
         contactToSave.uid = contact.UID;

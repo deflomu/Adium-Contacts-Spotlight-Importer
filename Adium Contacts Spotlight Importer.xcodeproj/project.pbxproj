@@ -14,7 +14,6 @@
 		29F4EC31146D9A3D00E5B628 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55243CAF1462FD0600878F39 /* Cocoa.framework */; };
 		29F4EC37146D9A3D00E5B628 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 29F4EC35146D9A3D00E5B628 /* InfoPlist.strings */; };
 		29F4EC39146D9A3D00E5B628 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29F4EC38146D9A3D00E5B628 /* main.m */; };
-		29F4EC3D146D9A3D00E5B628 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 29F4EC3B146D9A3D00E5B628 /* Credits.rtf */; };
 		29F4EC40146D9A3D00E5B628 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 29F4EC3F146D9A3D00E5B628 /* AppDelegate.m */; };
 		55243C8F1462FC7B00878F39 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55243C8E1462FC7B00878F39 /* CoreServices.framework */; };
 		55243C911462FC7B00878F39 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55243C901462FC7B00878F39 /* CoreFoundation.framework */; };
@@ -39,7 +38,6 @@
 		29F4EC36146D9A3D00E5B628 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		29F4EC38146D9A3D00E5B628 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		29F4EC3A146D9A3D00E5B628 /* adiumOpenSpotlight-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "adiumOpenSpotlight-Prefix.pch"; sourceTree = "<group>"; };
-		29F4EC3C146D9A3D00E5B628 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		29F4EC3E146D9A3D00E5B628 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		29F4EC3F146D9A3D00E5B628 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		55243C8B1462FC7B00878F39 /* Adium Contacts Spotlight Importer.mdimporter */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Adium Contacts Spotlight Importer.mdimporter"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,7 +135,6 @@
 				29F4EC35146D9A3D00E5B628 /* InfoPlist.strings */,
 				29F4EC38146D9A3D00E5B628 /* main.m */,
 				29F4EC3A146D9A3D00E5B628 /* adiumOpenSpotlight-Prefix.pch */,
-				29F4EC3B146D9A3D00E5B628 /* Credits.rtf */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -318,7 +315,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				29F4EC37146D9A3D00E5B628 /* InfoPlist.strings in Resources */,
-				29F4EC3D146D9A3D00E5B628 /* Credits.rtf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,14 +377,6 @@
 				29F4EC36146D9A3D00E5B628 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		29F4EC3B146D9A3D00E5B628 /* Credits.rtf */ = {
-			isa = PBXVariantGroup;
-			children = (
-				29F4EC3C146D9A3D00E5B628 /* en */,
-			);
-			name = Credits.rtf;
 			sourceTree = "<group>";
 		};
 		55243C991462FC7B00878F39 /* InfoPlist.strings */ = {
@@ -559,6 +547,7 @@
 				29F4EC45146D9A3D00E5B628 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		55243C851462FC7B00878F39 /* Build configuration list for PBXProject "Adium Contacts Spotlight Importer" */ = {
 			isa = XCConfigurationList;

@@ -67,7 +67,7 @@
 		55243CBF1462FDD900878F39 /* Adium.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Adium.framework; sourceTree = "<group>"; };
 		55243CC11462FE4200878F39 /* ContactsExportAdiumPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsExportAdiumPlugin.h; sourceTree = "<group>"; };
 		55243CC21462FE4200878F39 /* ContactsExportAdiumPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsExportAdiumPlugin.m; sourceTree = "<group>"; };
-		55ACA492146D36050078E418 /* CommonHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonHeaders.h; sourceTree = "<group>"; };
+		55ACA492146D36050078E418 /* CommonHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; name = CommonHeaders.h; path = Common/CommonHeaders.h; sourceTree = "<group>"; };
 		55EE09BB1471672100CF038D /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 

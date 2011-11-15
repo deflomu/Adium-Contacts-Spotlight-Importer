@@ -56,7 +56,6 @@
 
         [spotlightData setObject:nickname forKey:(NSString *)kMDItemDisplayName];
         [spotlightData setObject:nickname forKey:(NSString *)kMDItemFSName];
-        [spotlightData setObject:nickname forKey:(NSString *)kMDItemAlternateNames];
         [spotlightData setObject:[instance valueForKey:@"uid"] forKey:(NSString *)kMDItemInstantMessageAddresses];
         
          /*

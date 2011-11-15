@@ -96,7 +96,7 @@
     }
     
     NSMutableDictionary *storeOptions = [[NSMutableDictionary alloc] init];
-    [storeOptions setObject:@"adiumContact" forKey:NSExternalRecordExtensionOption];
+    [storeOptions setObject:@"adiumContactExported" forKey:NSExternalRecordExtensionOption];
     [storeOptions setObject:externalRecordsSupportFolder forKey:NSExternalRecordsDirectoryOption];
     [storeOptions setObject:NSBinaryExternalRecordType forKey:NSExternalRecordsFileFormatOption];
     
@@ -137,12 +137,6 @@
 - (void)saveData {
     NSError *error = nil;
     
-    /*NSFileManager *fm = [NSFileManager defaultManager];
-    
-    if (![fm removeItemAtPath:self.externalRecordsSupportFolder error:&error]) {
-        [[NSApplication sharedApplication] presentError:error];
-    }*/
-    
     if (![[self managedObjectContext] commitEditing]) {
         NSLog(@"%@:%@ unable to commit editing before saving", [self class], NSStringFromSelector(_cmd));
     }
@@ -162,6 +156,7 @@
 - (void)uninstallPlugin
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[adium contactController] removeObserver:self forKeyPath:@"allContacts"];
 }
 
 - (void) accountsConnected:(NSNotification *)aNotification {
@@ -199,6 +194,5 @@
     
     [self saveData];
 }
-
 
 @end

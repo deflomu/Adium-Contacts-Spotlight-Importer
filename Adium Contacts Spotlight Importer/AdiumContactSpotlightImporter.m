@@ -55,10 +55,9 @@
             return NO;
 
         [spotlightData setObject:nickname forKey:(NSString *)kMDItemDisplayName];
-        
-        [spotlightData setObject:nickname forKey:(NSString *)kMDItemTitle];
-        
-        [spotlightData setObject:@"Adium Contact" forKey:(NSString *)kMDItemKind];
+        [spotlightData setObject:nickname forKey:(NSString *)kMDItemFSName];
+        [spotlightData setObject:nickname forKey:(NSString *)kMDItemAlternateNames];
+        [spotlightData setObject:[instance valueForKey:@"uid"] forKey:(NSString *)kMDItemInstantMessageAddresses];
         
          /*
             Determine how you want to store the instance information in 'spotlightData' dictionary.

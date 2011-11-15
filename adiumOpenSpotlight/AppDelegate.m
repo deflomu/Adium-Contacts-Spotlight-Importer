@@ -6,7 +6,7 @@
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
-#define EXTERNAL_RECORD_EXTENSION @"adiumContact"
+#define EXTERNAL_RECORD_EXTENSION @"adiumContactExported"
 
 #import "AdiumContact.h"
 #import "AppDelegate.h"

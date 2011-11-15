@@ -11,7 +11,7 @@
 			<string>MDImporter</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>net.skweez.adium.contact</string>
+				<string>net.skweez.adium.contact.exported</string>
 			</array>
 		</dict>
 	</array>

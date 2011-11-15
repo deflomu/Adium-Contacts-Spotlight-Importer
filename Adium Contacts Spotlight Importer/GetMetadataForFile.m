@@ -8,8 +8,8 @@
 
 #define INFO @"contact"
 #define STORE_FILE_UTI @"net.skweez.adium"
-#define EXTERNAL_RECORD_UTI @"net.skweez.adium.contact"
-#define EXTERNAL_RECORD_EXTENSION @"adiumContact"
+#define EXTERNAL_RECORD_UTI @"net.skweez.adium.contact.exported"
+#define EXTERNAL_RECORD_EXTENSION @"adiumContactExported"
 
 #include <CoreFoundation/CoreFoundation.h>
 #import <CoreData/CoreData.h>

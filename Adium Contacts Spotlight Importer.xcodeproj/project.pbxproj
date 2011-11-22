@@ -28,6 +28,7 @@
 		55243CC01462FDD900878F39 /* Adium.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55243CBF1462FDD900878F39 /* Adium.framework */; };
 		55243CC31462FE4200878F39 /* ContactsExportAdiumPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 55243CC21462FE4200878F39 /* ContactsExportAdiumPlugin.m */; };
 		5549385C14717F3500D64024 /* AdiumContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 292A702A146432250036109B /* AdiumContact.m */; };
+		5566F7B6147AA38400D73605 /* Adium.icns in Resources */ = {isa = PBXBuildFile; fileRef = 5566F7B5147AA38400D73605 /* Adium.icns */; };
 		55EE09BC1471672100CF038D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EE09BB1471672100CF038D /* MainMenu.xib */; };
 		55EE09C1147176A100CF038D /* Adium.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 292A701B14642FA90036109B /* Adium.xcdatamodel */; };
 /* End PBXBuildFile section */
@@ -67,7 +68,8 @@
 		55243CBF1462FDD900878F39 /* Adium.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Adium.framework; sourceTree = "<group>"; };
 		55243CC11462FE4200878F39 /* ContactsExportAdiumPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsExportAdiumPlugin.h; sourceTree = "<group>"; };
 		55243CC21462FE4200878F39 /* ContactsExportAdiumPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsExportAdiumPlugin.m; sourceTree = "<group>"; };
-		55ACA492146D36050078E418 /* CommonHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; name = CommonHeaders.h; path = Common/CommonHeaders.h; sourceTree = "<group>"; };
+		5566F7B5147AA38400D73605 /* Adium.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Adium.icns; sourceTree = "<group>"; };
+		55ACA492146D36050078E418 /* CommonHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommonHeaders.h; path = Common/CommonHeaders.h; sourceTree = "<group>"; };
 		55EE09BB1471672100CF038D /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -135,6 +137,7 @@
 		29F4EC33146D9A3D00E5B628 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5566F7B5147AA38400D73605 /* Adium.icns */,
 				29F4EC34146D9A3D00E5B628 /* adiumOpenSpotlight-Info.plist */,
 				29F4EC35146D9A3D00E5B628 /* InfoPlist.strings */,
 				29F4EC38146D9A3D00E5B628 /* main.m */,
@@ -321,6 +324,7 @@
 			files = (
 				29F4EC37146D9A3D00E5B628 /* InfoPlist.strings in Resources */,
 				55EE09BC1471672100CF038D /* MainMenu.xib in Resources */,
+				5566F7B6147AA38400D73605 /* Adium.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

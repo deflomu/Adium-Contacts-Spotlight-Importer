@@ -64,6 +64,8 @@
 			<string>An Adium Contact</string>
 			<key>LSHandlerRank</key>
 			<string>Owner</string>
+			<key>CFBundleTypeIconFile</key>
+			<string>Adium.icns</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
 			<key>CFBundleTypeExtensions</key>

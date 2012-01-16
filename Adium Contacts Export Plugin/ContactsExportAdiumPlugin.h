@@ -16,10 +16,13 @@
 @interface ContactsExportAdiumPlugin : NSObject <AIPlugin> {
     NSString *path;
     
+    NSBundle *myBundle;
+    
     NSString *externalRecordsSupportFolder;
 }
 
 @property (retain) NSString *path;
+@property (retain) NSBundle *myBundle;
 @property (retain) NSString *externalRecordsSupportFolder;
 
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;

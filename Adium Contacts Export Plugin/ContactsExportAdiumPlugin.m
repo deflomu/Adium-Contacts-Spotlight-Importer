@@ -18,7 +18,7 @@
 
 @implementation ContactsExportAdiumPlugin
 
-@synthesize path, externalRecordsSupportFolder;
+@synthesize path, myBundle, externalRecordsSupportFolder;
 
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
 @synthesize managedObjectModel = __managedObjectModel;
@@ -32,11 +32,7 @@
         return __managedObjectModel;
     }
     
-    NSArray *pluginsPaths = AISearchPathForDirectories(AIPluginsDirectory);
-    
-    NSBundle *myBundle = [NSBundle bundleWithPath:[NSString stringWithFormat:@"%@/Adium Contacts Export Plugin.AdiumPlugin", [pluginsPaths objectAtIndex:0]]];
-    
-    NSURL *modelURL = [myBundle URLForResource:@"Adium" withExtension:@"mom"];
+    NSURL *modelURL = [self.myBundle URLForResource:@"Adium" withExtension:@"mom"];
     __managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];    
     return __managedObjectModel;
 }
@@ -149,6 +145,14 @@
 - (void)installPlugin
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accountsConnected:) name:ACCOUNT_CONNECTED object:nil];
+    
+    NSArray *pluginsPaths = AISearchPathForDirectories(AIPluginsDirectory);
+    
+    self.myBundle = [NSBundle bundleWithPath:[NSString stringWithFormat:@"%@/Adium Contacts Export Plugin.AdiumPlugin", [pluginsPaths objectAtIndex:0]]];
+    
+    /* register Adium Contacts Opener app by opening it */
+    [[NSWorkspace sharedWorkspace] launchApplication:[self.myBundle pathForResource:@"adiumOpenSpotlight" ofType:@"app"]];
+    
     
     self.path = [adium createResourcePathForName:EXPORTED_CONTACTS_DIRECTORY];
 }

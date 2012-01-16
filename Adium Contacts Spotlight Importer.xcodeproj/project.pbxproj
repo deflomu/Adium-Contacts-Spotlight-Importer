@@ -20,8 +20,8 @@
 		5505507C147BFA30005D54C4 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55243C8E1462FC7B00878F39 /* CoreServices.framework */; };
 		5505507D147BFA30005D54C4 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55243C901462FC7B00878F39 /* CoreFoundation.framework */; };
 		55055083147BFA30005D54C4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55055081147BFA30005D54C4 /* InfoPlist.strings */; };
-		55055085147BFA30005D54C4 /* GenerateThumbnailForURL.c in Sources */ = {isa = PBXBuildFile; fileRef = 55055084147BFA30005D54C4 /* GenerateThumbnailForURL.c */; };
-		55055087147BFA30005D54C4 /* GeneratePreviewForURL.c in Sources */ = {isa = PBXBuildFile; fileRef = 55055086147BFA30005D54C4 /* GeneratePreviewForURL.c */; };
+		55055085147BFA30005D54C4 /* GenerateThumbnailForURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 55055084147BFA30005D54C4 /* GenerateThumbnailForURL.m */; };
+		55055087147BFA30005D54C4 /* GeneratePreviewForURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 55055086147BFA30005D54C4 /* GeneratePreviewForURL.m */; };
 		55055089147BFA30005D54C4 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 55055088147BFA30005D54C4 /* main.c */; };
 		55243C8F1462FC7B00878F39 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55243C8E1462FC7B00878F39 /* CoreServices.framework */; };
 		55243C911462FC7B00878F39 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55243C901462FC7B00878F39 /* CoreFoundation.framework */; };
@@ -36,10 +36,35 @@
 		55243CC01462FDD900878F39 /* Adium.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55243CBF1462FDD900878F39 /* Adium.framework */; };
 		55243CC31462FE4200878F39 /* ContactsExportAdiumPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 55243CC21462FE4200878F39 /* ContactsExportAdiumPlugin.m */; };
 		5549385C14717F3500D64024 /* AdiumContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 292A702A146432250036109B /* AdiumContact.m */; };
+		554C723A14C48BD60056EACD /* Adium Contacts Spotlight Importer.mdimporter in CopyFiles */ = {isa = PBXBuildFile; fileRef = 55243C8B1462FC7B00878F39 /* Adium Contacts Spotlight Importer.mdimporter */; };
 		5566F7B6147AA38400D73605 /* Adium.icns in Resources */ = {isa = PBXBuildFile; fileRef = 5566F7B5147AA38400D73605 /* Adium.icns */; };
+		559BE23814C4810F009F2ABB /* adiumOpenSpotlight.app in Resources */ = {isa = PBXBuildFile; fileRef = 29F4EC2F146D9A3C00E5B628 /* adiumOpenSpotlight.app */; };
 		55EE09BC1471672100CF038D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EE09BB1471672100CF038D /* MainMenu.xib */; };
 		55EE09C1147176A100CF038D /* Adium.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 292A701B14642FA90036109B /* Adium.xcdatamodel */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		554C723B14C490EF0056EACD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55243C821462FC7B00878F39 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 29F4EC2E146D9A3C00E5B628;
+			remoteInfo = adiumOpenSpotlight;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		554C723914C48BB00056EACD /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library/Spotlight;
+			dstSubfolderSpec = 1;
+			files = (
+				554C723A14C48BD60056EACD /* Adium Contacts Spotlight Importer.mdimporter in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		292A701B14642FA90036109B /* Adium.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; name = Adium.xcdatamodel; path = "Adium Contacts Spotlight Importer/Adium.xcdatamodeld/Adium.xcdatamodel"; sourceTree = "<group>"; };
@@ -57,8 +82,8 @@
 		5505507A147BFA30005D54C4 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
 		55055080147BFA30005D54C4 /* Adium Contacts Quicklook-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Adium Contacts Quicklook-Info.plist"; sourceTree = "<group>"; };
 		55055082147BFA30005D54C4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		55055084147BFA30005D54C4 /* GenerateThumbnailForURL.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = GenerateThumbnailForURL.c; sourceTree = "<group>"; };
-		55055086147BFA30005D54C4 /* GeneratePreviewForURL.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = GeneratePreviewForURL.c; sourceTree = "<group>"; };
+		55055084147BFA30005D54C4 /* GenerateThumbnailForURL.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GenerateThumbnailForURL.m; sourceTree = "<group>"; };
+		55055086147BFA30005D54C4 /* GeneratePreviewForURL.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeneratePreviewForURL.m; sourceTree = "<group>"; };
 		55055088147BFA30005D54C4 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		5505508A147BFA30005D54C4 /* Adium Contacts Quicklook-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Adium Contacts Quicklook-Prefix.pch"; sourceTree = "<group>"; };
 		55243C8B1462FC7B00878F39 /* Adium Contacts Spotlight Importer.mdimporter */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Adium Contacts Spotlight Importer.mdimporter"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -178,8 +203,8 @@
 		5505507E147BFA30005D54C4 /* Adium Contacts Quicklook */ = {
 			isa = PBXGroup;
 			children = (
-				55055084147BFA30005D54C4 /* GenerateThumbnailForURL.c */,
-				55055086147BFA30005D54C4 /* GeneratePreviewForURL.c */,
+				55055084147BFA30005D54C4 /* GenerateThumbnailForURL.m */,
+				55055086147BFA30005D54C4 /* GeneratePreviewForURL.m */,
 				55055088147BFA30005D54C4 /* main.c */,
 				5505507F147BFA30005D54C4 /* Supporting Files */,
 			);
@@ -309,6 +334,7 @@
 				29F4EC2B146D9A3C00E5B628 /* Sources */,
 				29F4EC2C146D9A3C00E5B628 /* Frameworks */,
 				29F4EC2D146D9A3C00E5B628 /* Resources */,
+				554C723914C48BB00056EACD /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -366,6 +392,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				554C723C14C490EF0056EACD /* PBXTargetDependency */,
 			);
 			name = "Adium Contacts Export Plugin";
 			productName = "Adium Contacts Export Plugin";
@@ -432,6 +459,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				55243CBA1462FD0600878F39 /* InfoPlist.strings in Resources */,
+				559BE23814C4810F009F2ABB /* adiumOpenSpotlight.app in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,8 +491,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55055085147BFA30005D54C4 /* GenerateThumbnailForURL.c in Sources */,
-				55055087147BFA30005D54C4 /* GeneratePreviewForURL.c in Sources */,
+				55055085147BFA30005D54C4 /* GenerateThumbnailForURL.m in Sources */,
+				55055087147BFA30005D54C4 /* GeneratePreviewForURL.m in Sources */,
 				55055089147BFA30005D54C4 /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -492,6 +520,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		554C723C14C490EF0056EACD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 29F4EC2E146D9A3C00E5B628 /* adiumOpenSpotlight */;
+			targetProxy = 554C723B14C490EF0056EACD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		29F4EC35146D9A3D00E5B628 /* InfoPlist.strings */ = {
@@ -626,15 +662,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				DEPLOYMENT_LOCATION = YES;
-				DSTROOT = /;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Adium Contacts Spotlight Importer/Adium Contacts Spotlight Importer-Prefix.pch";
 				INFOPLIST_FILE = "Adium Contacts Spotlight Importer/Adium Contacts Spotlight Importer-Info.plist";
-				INSTALL_PATH = "$(HOME)/Library/Spotlight";
 				LIBRARY_STYLE = BUNDLE;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = mdimporter;
 			};
 			name = Debug;
@@ -643,15 +675,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				DEPLOYMENT_LOCATION = YES;
-				DSTROOT = /;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Adium Contacts Spotlight Importer/Adium Contacts Spotlight Importer-Prefix.pch";
 				INFOPLIST_FILE = "Adium Contacts Spotlight Importer/Adium Contacts Spotlight Importer-Info.plist";
-				INSTALL_PATH = "$(HOME)/Library/Spotlight";
 				LIBRARY_STYLE = BUNDLE;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = mdimporter;
 			};
 			name = Release;
@@ -711,6 +739,7 @@
 				5505508C147BFA30005D54C4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		55243C851462FC7B00878F39 /* Build configuration list for PBXProject "Adium Contacts Spotlight Importer" */ = {
 			isa = XCConfigurationList;

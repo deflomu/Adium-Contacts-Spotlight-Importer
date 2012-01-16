@@ -11,4 +11,6 @@
 
 #define STORE_TYPE NSXMLStoreType
 
+#define ENTITY_CONTACT_NAME @"Contact"
+
 #endif

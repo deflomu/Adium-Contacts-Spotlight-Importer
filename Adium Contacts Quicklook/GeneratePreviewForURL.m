@@ -1,83 +1,56 @@
-//
-//  AdiumContactSpotlightImporter.m
-//  Adium Contacts Spotlight Importer
-//
-//  Created by Florian Mutter on 03.11.11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
-//
+#include <CoreFoundation/CoreFoundation.h>
+#include <CoreServices/CoreServices.h>
+#include <QuickLook/QuickLook.h>
+#include <CoreData/CoreData.h>
+#include "CommonHeaders.h"
 
-#import "AdiumContactSpotlightImporter.h"
-#import "AdiumContact.h"
+OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview, CFURLRef url, CFStringRef contentTypeUTI, CFDictionaryRef options);
+void CancelPreviewGeneration(void *thisInterface, QLPreviewRequestRef preview);
 
-@interface AdiumContactSpotlightImporter ()
-@property (nonatomic, strong) NSURL *modelURL;
-@property (nonatomic, strong) NSURL *storeURL;
-@end
+/* -----------------------------------------------------------------------------
+   Generate a preview for file
 
-@implementation AdiumContactSpotlightImporter
+   This function's job is to create preview for designated file
+   ----------------------------------------------------------------------------- */
 
-@synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
-@synthesize managedObjectModel = __managedObjectModel;
-@synthesize managedObjectContext = __managedObjectContext;
-@synthesize modelURL = _modelURL;
-@synthesize storeURL = _storeURL;
-
-- (BOOL)importFileAtPath:(NSString *)filePath attributes:(NSMutableDictionary *)spotlightData error:(NSError **)error
+OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview, CFURLRef url, CFStringRef contentTypeUTI, CFDictionaryRef options)
 {
-        
-    NSDictionary *pathInfo = [NSPersistentStoreCoordinator elementsDerivedFromExternalRecordURL:[NSURL fileURLWithPath:filePath]];
-            
-    self.modelURL = [NSURL fileURLWithPath:[pathInfo valueForKey:NSModelPathKey]];
-    self.storeURL = [NSURL fileURLWithPath:[pathInfo valueForKey:NSStorePathKey]];
 
-
+    NSDictionary *pathInfo = [NSPersistentStoreCoordinator elementsDerivedFromExternalRecordURL:url];
+    
+    NSURL *modelURL = [NSURL fileURLWithPath:[pathInfo valueForKey:NSModelPathKey]];
+    NSURL *storeURL = [NSURL fileURLWithPath:[pathInfo valueForKey:NSStorePathKey]];
+    
+    
     NSURL *objectURI = [pathInfo valueForKey:NSObjectURIKey];
     NSManagedObjectID *oid = [[self persistentStoreCoordinator] managedObjectIDForURIRepresentation:objectURI];
-
+    
     if (!oid) {
         NSLog(@"%@:%@ to find object id from path %@", [self class], NSStringFromSelector(_cmd), filePath);
-        return NO;
+        return 255;
     }
-
+    
     NSManagedObject *instance = [[self managedObjectContext] objectWithID:oid];
-
+    
     // how you process each instance will depend on the entity that the instance belongs to
-
+    
     if ([[[instance entity] name] isEqualToString:ENTITY_CONTACT_NAME]) {
-
-        // set the display name for Spotlight search result
-        NSString *nickname = [instance valueForKey:@"ownDisplayName"];
-        if (!nickname)
-            nickname = [instance valueForKey:@"displayName"];
-        if (!nickname)
-            return NO;
-
-        [spotlightData setObject:nickname forKey:(NSString *)kMDItemDisplayName];
-        [spotlightData setObject:nickname forKey:(NSString *)kMDItemFSName];
-        [spotlightData setObject:[instance valueForKey:@"uid"] forKey:(NSString *)kMDItemInstantMessageAddresses];
         
-         /*
-            Determine how you want to store the instance information in 'spotlightData' dictionary.
-            For each property, pick the key kMDItem... from MDItem.h that best fits its content.  
-            If appropriate, aggregate the values of multiple properties before setting them in the dictionary.
-            For relationships, you may want to flatten values. 
-
-            id YOUR_FIELD_VALUE = [instance valueForKey:ATTRIBUTE_NAME];
-            [spotlightData setObject:YOUR_FIELD_VALUE forKey:(NSString *) kMDItem...];
-            ... more property values; 
-            To determine if a property should be indexed, call isIndexedBySpotlight
-
-         */
-
     }
+    
+    
+    return noErr;
+}
 
-    return YES;
+void CancelPreviewGeneration(void *thisInterface, QLPreviewRequestRef preview)
+{
+    // Implement only if supported
 }
 
 /**
-	Returns the managed object model. 
-	The last read model is cached in a global variable and reused
-	if the URL and modification date are identical
+ Returns the managed object model. 
+ The last read model is cached in a global variable and reused
+ if the URL and modification date are identical
  */
 static NSURL				*cachedModelURL = nil;
 static NSManagedObjectModel *cachedModel = nil;
@@ -96,12 +69,12 @@ static NSDate				*cachedModelModificationDate =nil;
 	
 	if (!__managedObjectModel) {
 		__managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:self.modelURL];
-
+        
 		if (!__managedObjectModel) {
 			NSLog(@"%@:%@ unable to load model at URL %@", [self class], NSStringFromSelector(_cmd), self.modelURL);
 			return nil;
 		}
-
+        
 		// Clear out all custom classes used by the model to avoid having to link them
 		// with the importer. Remove this code if you need to access your custom logic.
 		NSString *managedObjectClassName = [NSManagedObject className];
@@ -110,7 +83,7 @@ static NSDate				*cachedModelModificationDate =nil;
 		}
 		
 		// cache last loaded model
-
+        
 		cachedModelURL = self.modelURL;
 		cachedModel = __managedObjectModel;
 		cachedModelModificationDate = modelModificationDate;
@@ -120,42 +93,39 @@ static NSDate				*cachedModelModificationDate =nil;
 }
 
 /**
-    Returns the persistent store coordinator for the importer.  
+ Returns the persistent store coordinator for the importer.  
  */
 
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator
 {
     if (__persistentStoreCoordinator) return __persistentStoreCoordinator;
-
+    
     NSError *error = nil;
-        
+    
     __persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
     if (![__persistentStoreCoordinator addPersistentStoreWithType:STORE_TYPE configuration:nil URL:self.storeURL options:nil error:&error]) {
         NSLog(@"%@:%@ unable to add persistent store coordinator - %@", [self class], NSStringFromSelector(_cmd), error);
     }    
-
+    
     return __persistentStoreCoordinator;
 }
 
 /**
-    Returns the managed object context for the importer; already
-    bound to the persistent store coordinator. 
+ Returns the managed object context for the importer; already
+ bound to the persistent store coordinator. 
  */
- 
+
 - (NSManagedObjectContext *)managedObjectContext
 {
     if (__managedObjectContext) return __managedObjectContext;
-
+    
     NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
 	if (!coordinator) {
         NSLog(@"%@:%@ unable to get persistent store coordinator", [self class], NSStringFromSelector(_cmd));
 		return nil;
 	}
-
+    
 	__managedObjectContext = [[NSManagedObjectContext alloc] init];
 	[__managedObjectContext setPersistentStoreCoordinator:coordinator];
     
-    return __managedObjectContext;
-}
-
-@end
+    

@@ -38,6 +38,8 @@
 		5549385C14717F3500D64024 /* AdiumContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 292A702A146432250036109B /* AdiumContact.m */; };
 		554C723A14C48BD60056EACD /* Adium Contacts Spotlight Importer.mdimporter in CopyFiles */ = {isa = PBXBuildFile; fileRef = 55243C8B1462FC7B00878F39 /* Adium Contacts Spotlight Importer.mdimporter */; };
 		5566F7B6147AA38400D73605 /* Adium.icns in Resources */ = {isa = PBXBuildFile; fileRef = 5566F7B5147AA38400D73605 /* Adium.icns */; };
+		55969ECB14C5B8E7003D10D1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55243CB31462FD0600878F39 /* CoreData.framework */; };
+		55969ECC14C5B923003D10D1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55243CB41462FD0600878F39 /* Foundation.framework */; };
 		559BE23814C4810F009F2ABB /* adiumOpenSpotlight.app in Resources */ = {isa = PBXBuildFile; fileRef = 29F4EC2F146D9A3C00E5B628 /* adiumOpenSpotlight.app */; };
 		55EE09BC1471672100CF038D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EE09BB1471672100CF038D /* MainMenu.xib */; };
 		55EE09C1147176A100CF038D /* Adium.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 292A701B14642FA90036109B /* Adium.xcdatamodel */; };
@@ -128,6 +130,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55969ECC14C5B923003D10D1 /* Foundation.framework in Frameworks */,
+				55969ECB14C5B8E7003D10D1 /* CoreData.framework in Frameworks */,
 				55055079147BFA30005D54C4 /* QuickLook.framework in Frameworks */,
 				5505507B147BFA30005D54C4 /* ApplicationServices.framework in Frameworks */,
 				5505507C147BFA30005D54C4 /* CoreServices.framework in Frameworks */,
@@ -600,12 +604,15 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = NO;
+				DEPLOYMENT_LOCATION = YES;
+				DSTROOT = /;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Adium Contacts Quicklook/Adium Contacts Quicklook-Prefix.pch";
 				INFOPLIST_FILE = "Adium Contacts Quicklook/Adium Contacts Quicklook-Info.plist";
-				INSTALL_PATH = /Library/QuickLook;
+				INSTALL_PATH = /Users/elm/Library/QuickLook;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = qlgenerator;
 			};
 			name = Debug;
@@ -615,12 +622,15 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = NO;
+				DEPLOYMENT_LOCATION = YES;
+				DSTROOT = /;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Adium Contacts Quicklook/Adium Contacts Quicklook-Prefix.pch";
 				INFOPLIST_FILE = "Adium Contacts Quicklook/Adium Contacts Quicklook-Info.plist";
-				INSTALL_PATH = /Library/QuickLook;
+				INSTALL_PATH = /Users/elm/Library/QuickLook;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = qlgenerator;
 			};
 			name = Release;

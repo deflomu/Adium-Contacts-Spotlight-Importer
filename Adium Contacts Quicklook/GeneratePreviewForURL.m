@@ -15,29 +15,59 @@ void CancelPreviewGeneration(void *thisInterface, QLPreviewRequestRef preview);
 
 OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview, CFURLRef url, CFStringRef contentTypeUTI, CFDictionaryRef options)
 {
-
-    NSDictionary *pathInfo = [NSPersistentStoreCoordinator elementsDerivedFromExternalRecordURL:url];
+    NSAutoreleasePool *pool;
+    NSMutableDictionary *props;
+    NSMutableString *html;
     
-    NSURL *modelURL = [NSURL fileURLWithPath:[pathInfo valueForKey:NSModelPathKey]];
+    pool = [[NSAutoreleasePool alloc] init];
+    
+    NSDictionary *pathInfo = [NSPersistentStoreCoordinator elementsDerivedFromExternalRecordURL:((__bridge NSURL*)url)];
+    
+    NSManagedObjectModel *model = [[NSManagedObjectModel alloc] initWithContentsOfURL:[NSURL fileURLWithPath:[pathInfo valueForKey:NSModelPathKey]]];
+    
+    NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
+    
+    NSError *error = nil;
     NSURL *storeURL = [NSURL fileURLWithPath:[pathInfo valueForKey:NSStorePathKey]];
     
-    
-    NSURL *objectURI = [pathInfo valueForKey:NSObjectURIKey];
-    NSManagedObjectID *oid = [[self persistentStoreCoordinator] managedObjectIDForURIRepresentation:objectURI];
-    
-    if (!oid) {
-        NSLog(@"%@:%@ to find object id from path %@", [self class], NSStringFromSelector(_cmd), filePath);
-        return 255;
+    if (![coordinator addPersistentStoreWithType:STORE_TYPE configuration:nil URL:storeURL options:nil error:&error]) {
+        NSLog(@"Unable to add persistent store coordinator - %@", error);
     }
     
-    NSManagedObject *instance = [[self managedObjectContext] objectWithID:oid];
+    NSURL *uri = [pathInfo valueForKey:NSObjectURIKey];
     
-    // how you process each instance will depend on the entity that the instance belongs to
+    NSManagedObjectID *oid = [coordinator managedObjectIDForURIRepresentation:uri];
     
-    if ([[[instance entity] name] isEqualToString:ENTITY_CONTACT_NAME]) {
+    NSManagedObjectContext *moc = [[NSManagedObjectContext alloc] init];
+    [moc setPersistentStoreCoordinator:coordinator];
+    
+    NSManagedObject *instance = [moc objectWithID:oid];
+    
+    if (QLPreviewRequestIsCancelled(preview))
+        return noErr;
+    if (instance!=NULL)
+    {
+        props=[[[NSMutableDictionary alloc] init] autorelease];
+        [props setObject:@"UTF-8" forKey:(NSString *)kQLPreviewPropertyTextEncodingNameKey];
+        [props setObject:@"text/html" forKey:(NSString *)kQLPreviewPropertyMIMETypeKey];
         
+        html=[[[NSMutableString alloc] init] autorelease];
+        [html appendString:@"<html><body>"];
+        
+        NSString *nickname = [instance valueForKey:@"ownDisplayName"];
+        if (!nickname)
+            nickname = [instance valueForKey:@"displayName"];
+        if (!nickname)
+            return NO;
+        
+        [html appendFormat:@"<h1>%@</h1>", nickname];
+        
+        [html appendString:@"</body></html>"];
+        
+        QLPreviewRequestSetDataRepresentation(preview,(CFDataRef)[html dataUsingEncoding:NSUTF8StringEncoding],kUTTypeHTML,(CFDictionaryRef)props);
     }
     
+    [pool release];
     
     return noErr;
 }
@@ -46,86 +76,3 @@ void CancelPreviewGeneration(void *thisInterface, QLPreviewRequestRef preview)
 {
     // Implement only if supported
 }
-
-/**
- Returns the managed object model. 
- The last read model is cached in a global variable and reused
- if the URL and modification date are identical
- */
-static NSURL				*cachedModelURL = nil;
-static NSManagedObjectModel *cachedModel = nil;
-static NSDate				*cachedModelModificationDate =nil;
-
-- (NSManagedObjectModel *)managedObjectModel
-{
-    if (__managedObjectModel != nil) return __managedObjectModel;
-	
-	NSDictionary *modelFileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:[self.modelURL path] error:nil];
-	NSDate *modelModificationDate =  [modelFileAttributes objectForKey:NSFileModificationDate];
-	
-	if ([cachedModelURL isEqual:self.modelURL] && [modelModificationDate isEqualToDate:cachedModelModificationDate]) {
-		__managedObjectModel = cachedModel;
-	} 	
-	
-	if (!__managedObjectModel) {
-		__managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:self.modelURL];
-        
-		if (!__managedObjectModel) {
-			NSLog(@"%@:%@ unable to load model at URL %@", [self class], NSStringFromSelector(_cmd), self.modelURL);
-			return nil;
-		}
-        
-		// Clear out all custom classes used by the model to avoid having to link them
-		// with the importer. Remove this code if you need to access your custom logic.
-		NSString *managedObjectClassName = [NSManagedObject className];
-		for (NSEntityDescription *entity in __managedObjectModel) {
-			[entity setManagedObjectClassName:managedObjectClassName];
-		}
-		
-		// cache last loaded model
-        
-		cachedModelURL = self.modelURL;
-		cachedModel = __managedObjectModel;
-		cachedModelModificationDate = modelModificationDate;
-	}
-	
-	return __managedObjectModel;
-}
-
-/**
- Returns the persistent store coordinator for the importer.  
- */
-
-- (NSPersistentStoreCoordinator *)persistentStoreCoordinator
-{
-    if (__persistentStoreCoordinator) return __persistentStoreCoordinator;
-    
-    NSError *error = nil;
-    
-    __persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    if (![__persistentStoreCoordinator addPersistentStoreWithType:STORE_TYPE configuration:nil URL:self.storeURL options:nil error:&error]) {
-        NSLog(@"%@:%@ unable to add persistent store coordinator - %@", [self class], NSStringFromSelector(_cmd), error);
-    }    
-    
-    return __persistentStoreCoordinator;
-}
-
-/**
- Returns the managed object context for the importer; already
- bound to the persistent store coordinator. 
- */
-
-- (NSManagedObjectContext *)managedObjectContext
-{
-    if (__managedObjectContext) return __managedObjectContext;
-    
-    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-	if (!coordinator) {
-        NSLog(@"%@:%@ unable to get persistent store coordinator", [self class], NSStringFromSelector(_cmd));
-		return nil;
-	}
-    
-	__managedObjectContext = [[NSManagedObjectContext alloc] init];
-	[__managedObjectContext setPersistentStoreCoordinator:coordinator];
-    
-    

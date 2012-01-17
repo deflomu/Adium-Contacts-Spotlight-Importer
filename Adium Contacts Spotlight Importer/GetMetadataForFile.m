@@ -67,7 +67,7 @@ Boolean GetMetadataForFile(void *thisInterface, CFMutableDictionaryRef attribute
         if ([(__bridge NSString *)contentTypeUTI isEqualToString:EXTERNAL_RECORD_UTI]) {
             // import from an external record file
             
-            AdiumContactSpotlightImporter *importer = [[AdiumContactSpotlightImporter alloc] init];
+            AdiumContactSpotlightImporter *importer = [[[AdiumContactSpotlightImporter alloc] init] autorelease];
             
             ok = [importer importFileAtPath:(__bridge NSString *)pathToFile attributes:(__bridge NSMutableDictionary *)attributes error:&error];
         }

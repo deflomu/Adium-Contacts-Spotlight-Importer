@@ -65,6 +65,7 @@
                 NSAppleScript *script = [[NSAppleScript alloc] initWithSource:myScript];
                 
                 [script executeAndReturnError:nil];
+                [script release];
             }
         }
     }

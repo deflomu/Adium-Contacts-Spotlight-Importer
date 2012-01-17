@@ -9,7 +9,14 @@
 #import <Cocoa/Cocoa.h>
 #import "CommonHeaders.h"
 
-@interface AdiumContactSpotlightImporter : NSObject
+@interface AdiumContactSpotlightImporter : NSObject {
+    NSPersistentStoreCoordinator *__persistentStoreCoordinator;
+    NSManagedObjectModel *__managedObjectModel;
+    NSManagedObjectContext *__managedObjectContext;
+    
+    NSURL *_modelURL;
+    NSURL *_storeURL;
+}
 
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;

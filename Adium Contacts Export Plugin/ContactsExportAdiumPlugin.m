@@ -91,13 +91,14 @@
         [[NSApplication sharedApplication] presentError:error];
     }
     
-    NSMutableDictionary *storeOptions = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *storeOptions = [[[NSMutableDictionary alloc] init] autorelease];
     [storeOptions setObject:@"adiumContactExported" forKey:NSExternalRecordExtensionOption];
     [storeOptions setObject:externalRecordsSupportFolder forKey:NSExternalRecordsDirectoryOption];
     [storeOptions setObject:NSBinaryExternalRecordType forKey:NSExternalRecordsFileFormatOption];
     
     NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:mom];
     if (![coordinator addPersistentStoreWithType:NSXMLStoreType configuration:nil URL:url options:storeOptions error:&error]) {
+        [coordinator release];
         [[NSApplication sharedApplication] presentError:error];
         return nil;
     }
@@ -195,6 +196,8 @@
         contactToSave.userIcon = contact.userIconData;
         contactToSave.accountName = contact.account.UID;
     }
+    
+    [request release];
     
     [self saveData];
 }

@@ -568,10 +568,14 @@
 		29F4EC44146D9A3D00E5B628 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "adiumOpenSpotlight/adiumOpenSpotlight-Prefix.pch";
 				INFOPLIST_FILE = "adiumOpenSpotlight/adiumOpenSpotlight-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.6;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -579,10 +583,14 @@
 		29F4EC45146D9A3D00E5B628 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "adiumOpenSpotlight/adiumOpenSpotlight-Prefix.pch";
 				INFOPLIST_FILE = "adiumOpenSpotlight/adiumOpenSpotlight-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.6;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -590,10 +598,13 @@
 		5505508B147BFA30005D54C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Adium Contacts Quicklook/Adium Contacts Quicklook-Prefix.pch";
 				INFOPLIST_FILE = "Adium Contacts Quicklook/Adium Contacts Quicklook-Info.plist";
 				INSTALL_PATH = /Library/QuickLook;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = qlgenerator;
 			};
@@ -602,10 +613,13 @@
 		5505508C147BFA30005D54C4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Adium Contacts Quicklook/Adium Contacts Quicklook-Prefix.pch";
 				INFOPLIST_FILE = "Adium Contacts Quicklook/Adium Contacts Quicklook-Info.plist";
 				INSTALL_PATH = /Library/QuickLook;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = qlgenerator;
 			};
@@ -662,11 +676,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Adium Contacts Spotlight Importer/Adium Contacts Spotlight Importer-Prefix.pch";
 				INFOPLIST_FILE = "Adium Contacts Spotlight Importer/Adium Contacts Spotlight Importer-Info.plist";
 				LIBRARY_STYLE = BUNDLE;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.6;
 				WRAPPER_EXTENSION = mdimporter;
 			};
 			name = Debug;
@@ -675,11 +693,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Adium Contacts Spotlight Importer/Adium Contacts Spotlight Importer-Prefix.pch";
 				INFOPLIST_FILE = "Adium Contacts Spotlight Importer/Adium Contacts Spotlight Importer-Info.plist";
 				LIBRARY_STYLE = BUNDLE;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.6;
 				WRAPPER_EXTENSION = mdimporter;
 			};
 			name = Release;
@@ -687,6 +709,8 @@
 		55243CBD1462FD0600878F39 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = NO;
 				DEPLOYMENT_LOCATION = YES;
 				DSTROOT = /;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -697,7 +721,9 @@
 				GCC_PREFIX_HEADER = "Adium Contacts Export Plugin/Adium Contacts Export Plugin-Prefix.pch";
 				INFOPLIST_FILE = "Adium Contacts Export Plugin/Adium Contacts Export Plugin-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Application Support/Adium 2.0/PlugIns/";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.6;
 				WRAPPER_EXTENSION = AdiumPlugin;
 			};
 			name = Debug;
@@ -705,6 +731,8 @@
 		55243CBE1462FD0600878F39 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = NO;
 				DEPLOYMENT_LOCATION = YES;
 				DSTROOT = /;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -715,7 +743,9 @@
 				GCC_PREFIX_HEADER = "Adium Contacts Export Plugin/Adium Contacts Export Plugin-Prefix.pch";
 				INFOPLIST_FILE = "Adium Contacts Export Plugin/Adium Contacts Export Plugin-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Application Support/Adium 2.0/PlugIns/";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.6;
 				WRAPPER_EXTENSION = AdiumPlugin;
 			};
 			name = Release;

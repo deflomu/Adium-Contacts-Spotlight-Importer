@@ -611,7 +611,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Adium Contacts Quicklook/Adium Contacts Quicklook-Prefix.pch";
 				INFOPLIST_FILE = "Adium Contacts Quicklook/Adium Contacts Quicklook-Info.plist";
-				INSTALL_PATH = /Users/elm/Library/QuickLook;
+				INSTALL_PATH = $HOME/Library/QuickLook;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = NO;
@@ -629,7 +629,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Adium Contacts Quicklook/Adium Contacts Quicklook-Prefix.pch";
 				INFOPLIST_FILE = "Adium Contacts Quicklook/Adium Contacts Quicklook-Info.plist";
-				INSTALL_PATH = /Users/elm/Library/QuickLook;
+				INSTALL_PATH = $HOME/Library/QuickLook;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = NO;

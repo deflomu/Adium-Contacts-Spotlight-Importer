@@ -2,6 +2,7 @@
 #include <CoreServices/CoreServices.h>
 #include <QuickLook/QuickLook.h>
 #include <CoreData/CoreData.h>
+#include <Cocoa/Cocoa.h>
 #include "CommonHeaders.h"
 
 OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview, CFURLRef url, CFStringRef contentTypeUTI, CFDictionaryRef options);
@@ -16,10 +17,12 @@ void CancelPreviewGeneration(void *thisInterface, QLPreviewRequestRef preview);
 OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview, CFURLRef url, CFStringRef contentTypeUTI, CFDictionaryRef options)
 {
     NSAutoreleasePool *pool;
-    NSMutableDictionary *props;
-    NSMutableString *html;
+    NSError *error = nil;
     
     pool = [[NSAutoreleasePool alloc] init];
+    
+    id      textView ;
+    NSRect  viewRect  ;
     
     NSDictionary *pathInfo = [NSPersistentStoreCoordinator elementsDerivedFromExternalRecordURL:((__bridge NSURL*)url)];
     
@@ -27,7 +30,6 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
     
     NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
     
-    NSError *error = nil;
     NSURL *storeURL = [NSURL fileURLWithPath:[pathInfo valueForKey:NSStorePathKey]];
     
     if (![coordinator addPersistentStoreWithType:STORE_TYPE configuration:nil URL:storeURL options:nil error:&error]) {
@@ -45,26 +47,47 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
     
     if (QLPreviewRequestIsCancelled(preview))
         return noErr;
-    if (instance!=NULL)
-    {
-        props=[[[NSMutableDictionary alloc] init] autorelease];
-        [props setObject:@"UTF-8" forKey:(NSString *)kQLPreviewPropertyTextEncodingNameKey];
-        [props setObject:@"text/html" forKey:(NSString *)kQLPreviewPropertyMIMETypeKey];
+    if (instance!=NULL) {
         
-        html=[[[NSMutableString alloc] init] autorelease];
-        [html appendString:@"<html><body>"];
+        viewRect = NSMakeRect( 0, 0, 500.0,  500.0 );
+        NSView *view = [[NSView alloc] initWithFrame:viewRect];
         
         NSString *nickname = [instance valueForKey:@"ownDisplayName"];
         if (!nickname)
             nickname = [instance valueForKey:@"displayName"];
         if (!nickname)
             return NO;
+        textView   = [ [ NSTextView alloc ] initWithFrame:NSMakeRect(200.0, 400.0, 300.0, 20.0) ];
+        [ textView insertText:nickname];
+        [textView setDrawsBackground:NO];
+        [view addSubview:textView];
         
-        [html appendFormat:@"<h1>%@</h1>", nickname];
+        NSData *imageData = [instance valueForKey:@"userIcon"];
+        NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithData:imageData];
+        NSImage *image = [[NSImage alloc] init];
+        [image addRepresentation:imageRep];
+        NSImageView *imageView = [[NSImageView alloc] initWithFrame:NSMakeRect(20.0, 400.0, image.size.width, image.size.height)];
+        [imageView setImage:image];
+        [view addSubview:imageView];
         
-        [html appendString:@"</body></html>"];
+        CGSize canvasSize = CGSizeMake(500.0, 500.0);
+        CGContextRef cgContext = QLPreviewRequestCreateContext(preview, canvasSize, true, NULL);
         
-        QLPreviewRequestSetDataRepresentation(preview,(CFDataRef)[html dataUsingEncoding:NSUTF8StringEncoding],kUTTypeHTML,(CFDictionaryRef)props);
+        if(cgContext) {
+            NSGraphicsContext *context = [NSGraphicsContext graphicsContextWithGraphicsPort:(void *)cgContext flipped:YES];
+            if(context) {
+                [NSGraphicsContext saveGraphicsState];
+                [NSGraphicsContext setCurrentContext:context];
+                [context saveGraphicsState];
+                
+                [view displayRectIgnoringOpacity:viewRect inContext:context];
+                
+                [context restoreGraphicsState];
+                [NSGraphicsContext restoreGraphicsState];
+            }
+            QLPreviewRequestFlushContext(preview, cgContext);
+            CFRelease(cgContext);
+        }
     }
     
     [pool release];

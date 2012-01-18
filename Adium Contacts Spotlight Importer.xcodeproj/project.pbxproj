@@ -38,6 +38,7 @@
 		5549385C14717F3500D64024 /* AdiumContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 292A702A146432250036109B /* AdiumContact.m */; };
 		554C723A14C48BD60056EACD /* Adium Contacts Spotlight Importer.mdimporter in CopyFiles */ = {isa = PBXBuildFile; fileRef = 55243C8B1462FC7B00878F39 /* Adium Contacts Spotlight Importer.mdimporter */; };
 		5566F7B6147AA38400D73605 /* Adium.icns in Resources */ = {isa = PBXBuildFile; fileRef = 5566F7B5147AA38400D73605 /* Adium.icns */; };
+		5588C98914C7367F00187064 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55243CAF1462FD0600878F39 /* Cocoa.framework */; };
 		55969ECB14C5B8E7003D10D1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55243CB31462FD0600878F39 /* CoreData.framework */; };
 		55969ECC14C5B923003D10D1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55243CB41462FD0600878F39 /* Foundation.framework */; };
 		559BE23814C4810F009F2ABB /* adiumOpenSpotlight.app in Resources */ = {isa = PBXBuildFile; fileRef = 29F4EC2F146D9A3C00E5B628 /* adiumOpenSpotlight.app */; };
@@ -130,6 +131,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5588C98914C7367F00187064 /* Cocoa.framework in Frameworks */,
 				55969ECC14C5B923003D10D1 /* Foundation.framework in Frameworks */,
 				55969ECB14C5B8E7003D10D1 /* CoreData.framework in Frameworks */,
 				55055079147BFA30005D54C4 /* QuickLook.framework in Frameworks */,

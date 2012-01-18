@@ -35,6 +35,7 @@
 		55243CBA1462FD0600878F39 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55243CB81462FD0600878F39 /* InfoPlist.strings */; };
 		55243CC01462FDD900878F39 /* Adium.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55243CBF1462FDD900878F39 /* Adium.framework */; };
 		55243CC31462FE4200878F39 /* ContactsExportAdiumPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 55243CC21462FE4200878F39 /* ContactsExportAdiumPlugin.m */; };
+		55267D9414C785B9001CC6B5 /* Adium Contacts Quicklook.qlgenerator in CopyFiles */ = {isa = PBXBuildFile; fileRef = 55055077147BFA30005D54C4 /* Adium Contacts Quicklook.qlgenerator */; };
 		5549385C14717F3500D64024 /* AdiumContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 292A702A146432250036109B /* AdiumContact.m */; };
 		554C723A14C48BD60056EACD /* Adium Contacts Spotlight Importer.mdimporter in CopyFiles */ = {isa = PBXBuildFile; fileRef = 55243C8B1462FC7B00878F39 /* Adium Contacts Spotlight Importer.mdimporter */; };
 		5566F7B6147AA38400D73605 /* Adium.icns in Resources */ = {isa = PBXBuildFile; fileRef = 5566F7B5147AA38400D73605 /* Adium.icns */; };
@@ -60,6 +61,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		55267D9214C785A9001CC6B5 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library/QuickLook;
+			dstSubfolderSpec = 1;
+			files = (
+				55267D9414C785B9001CC6B5 /* Adium Contacts Quicklook.qlgenerator in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		554C723914C48BB00056EACD /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -351,6 +362,7 @@
 				29F4EC2C146D9A3C00E5B628 /* Frameworks */,
 				29F4EC2D146D9A3C00E5B628 /* Resources */,
 				554C723914C48BB00056EACD /* CopyFiles */,
+				55267D9214C785A9001CC6B5 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -618,15 +630,11 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = NO;
-				DEPLOYMENT_LOCATION = YES;
-				DSTROOT = /;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Adium Contacts Quicklook/Adium Contacts Quicklook-Prefix.pch";
 				INFOPLIST_FILE = "Adium Contacts Quicklook/Adium Contacts Quicklook-Info.plist";
-				INSTALL_PATH = $HOME/Library/QuickLook;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = qlgenerator;
 			};
 			name = Debug;
@@ -636,15 +644,11 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = NO;
-				DEPLOYMENT_LOCATION = YES;
-				DSTROOT = /;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Adium Contacts Quicklook/Adium Contacts Quicklook-Prefix.pch";
 				INFOPLIST_FILE = "Adium Contacts Quicklook/Adium Contacts Quicklook-Info.plist";
-				INSTALL_PATH = $HOME/Library/QuickLook;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = qlgenerator;
 			};
 			name = Release;
@@ -735,7 +739,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = NO;
-				DEPLOYMENT_LOCATION = YES;
+				DEPLOYMENT_LOCATION = NO;
 				DSTROOT = /;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -757,7 +761,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = NO;
-				DEPLOYMENT_LOCATION = YES;
+				DEPLOYMENT_LOCATION = NO;
 				DSTROOT = /;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

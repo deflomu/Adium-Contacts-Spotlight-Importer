@@ -4,6 +4,7 @@
 #include <CoreData/CoreData.h>
 #include <Cocoa/Cocoa.h>
 #include "CommonHeaders.h"
+#include "AdiumContactQuicklookViewController.h"
 
 OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview, CFURLRef url, CFStringRef contentTypeUTI, CFDictionaryRef options);
 void CancelPreviewGeneration(void *thisInterface, QLPreviewRequestRef preview);
@@ -20,9 +21,6 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
     NSError *error = nil;
     
     pool = [[NSAutoreleasePool alloc] init];
-    
-    NSRect  viewRect  ;
-    NSTextField *uiDisplayName;
     
     NSDictionary *pathInfo = [NSPersistentStoreCoordinator elementsDerivedFromExternalRecordURL:((__bridge NSURL*)url)];
     
@@ -49,28 +47,24 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
         return noErr;
     if (instance!=NULL) {
         
-        viewRect = NSMakeRect( 0, 0, 500.0,  500.0 );
-        NSView *view = [[NSView alloc] initWithFrame:viewRect];
+        NSBundle *myBundle = [NSBundle bundleWithIdentifier:@"net.skweez.adium.contact.Adium-Contacts-Quicklook"];
+        
+        AdiumContactQuicklookViewController *acqvc = [[AdiumContactQuicklookViewController alloc] initWithNibName:@"AdiumContactQuicklookViewController" bundle:myBundle];
         
         NSString *nickname = [instance valueForKey:@"ownDisplayName"];
         if (!nickname)
             nickname = [instance valueForKey:@"displayName"];
         if (!nickname)
             return NO;
-        uiDisplayName   = [ [ NSTextField alloc ] init];
-        [uiDisplayName setStringValue:nickname];
-        [uiDisplayName setDrawsBackground:NO];
-        [view addSubview:uiDisplayName];
+        acqvc.uiDisplayName.stringValue = nickname;
         
         NSData *imageData = [instance valueForKey:@"userIcon"];
         NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithData:imageData];
         NSImage *image = [[NSImage alloc] init];
         [image addRepresentation:imageRep];
-        NSImageView *imageView = [[NSImageView alloc] init];
-        [imageView setImage:image];
-        [view addSubview:imageView];
+        [acqvc.uiUserIcon setImage:image];
 
-        CGSize canvasSize = CGSizeMake(500.0, 500.0);
+        CGSize canvasSize = CGSizeMake(acqvc.view.frame.size.width, acqvc.view.frame.size.height);
         CGContextRef cgContext = QLPreviewRequestCreateContext(preview, canvasSize, true, NULL);
         
         if(cgContext) {
@@ -80,7 +74,7 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
                 [NSGraphicsContext setCurrentContext:context];
                 [context saveGraphicsState];
                 
-                [view displayRectIgnoringOpacity:viewRect inContext:context];
+                [acqvc.view displayRectIgnoringOpacity:acqvc.view.frame inContext:context];
                 
                 [context restoreGraphicsState];
                 [NSGraphicsContext restoreGraphicsState];

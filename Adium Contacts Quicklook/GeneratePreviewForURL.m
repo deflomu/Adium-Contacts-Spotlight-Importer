@@ -21,8 +21,8 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
     
     pool = [[NSAutoreleasePool alloc] init];
     
-    id      textView ;
     NSRect  viewRect  ;
+    NSTextField *uiDisplayName;
     
     NSDictionary *pathInfo = [NSPersistentStoreCoordinator elementsDerivedFromExternalRecordURL:((__bridge NSURL*)url)];
     
@@ -57,19 +57,19 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
             nickname = [instance valueForKey:@"displayName"];
         if (!nickname)
             return NO;
-        textView   = [ [ NSTextView alloc ] initWithFrame:NSMakeRect(200.0, 400.0, 300.0, 20.0) ];
-        [ textView insertText:nickname];
-        [textView setDrawsBackground:NO];
-        [view addSubview:textView];
+        uiDisplayName   = [ [ NSTextField alloc ] init];
+        [uiDisplayName setStringValue:nickname];
+        [uiDisplayName setDrawsBackground:NO];
+        [view addSubview:uiDisplayName];
         
         NSData *imageData = [instance valueForKey:@"userIcon"];
         NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithData:imageData];
         NSImage *image = [[NSImage alloc] init];
         [image addRepresentation:imageRep];
-        NSImageView *imageView = [[NSImageView alloc] initWithFrame:NSMakeRect(20.0, 400.0, image.size.width, image.size.height)];
+        NSImageView *imageView = [[NSImageView alloc] init];
         [imageView setImage:image];
         [view addSubview:imageView];
-        
+
         CGSize canvasSize = CGSizeMake(500.0, 500.0);
         CGContextRef cgContext = QLPreviewRequestCreateContext(preview, canvasSize, true, NULL);
         

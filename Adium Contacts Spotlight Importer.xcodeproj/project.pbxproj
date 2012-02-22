@@ -433,7 +433,7 @@
 		55243C821462FC7B00878F39 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0430;
 			};
 			buildConfigurationList = 55243C851462FC7B00878F39 /* Build configuration list for PBXProject "Adium Contacts Spotlight Importer" */;
 			compatibilityVersion = "Xcode 3.2";

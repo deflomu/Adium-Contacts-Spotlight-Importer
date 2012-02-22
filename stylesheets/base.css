@@ -52,11 +52,12 @@
 /* #Basic Styles
 ================================================== */
 	body {
-		background: #fff;
+		background: #E2E2E2;
 		font: 14px/21px "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
 		color: #444;
 		-webkit-font-smoothing: antialiased; /* Fix for webkit rendering */
 		-webkit-text-size-adjust: 100%;
+		text-shadow: 0px 1px 1px white;
  }
 
 
@@ -92,7 +93,7 @@
 	blockquote cite:before { content: "\2014 \0020"; }
 	blockquote cite a, blockquote cite a:visited, blockquote cite a:visited { color: #555; }
 
-	hr { border: solid #ddd; border-width: 1px 0 0; clear: both; margin: 10px 0 30px; height: 0; }
+	hr { border: solid #8C8C8C; border-width: 1px 0 0; clear: both; margin: 10px 0 30px; height: 0; }
 
 
 /* #Links

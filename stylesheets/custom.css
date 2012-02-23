@@ -15,9 +15,14 @@
   top: 2.5em;
   min-width: 165px;
   /* 45 deg ccw rotation */
-  -moz-transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
-  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);  /* Saf3.1+, Chrome */
+     -moz-transform: rotate(-45deg);  /* FF3.5+ */
+      -ms-transform: rotate(-45deg);  /* IE9 */
+       -o-transform: rotate(-45deg);  /* Opera 10.5 */
+          transform: rotate(-45deg);
+             filter: progid:DXImageTransform.Microsoft.Matrix(/* IE6–IE9 */
+                     M11=0.7071067811865476, M12=0.7071067811865475, M21=-0.7071067811865475, M22=0.7071067811865476, sizingMethod='auto expand');
+               zoom: 1;
   /* shadow */
   -moz-box-shadow: 0 0 1em #888;
   -webkit-box-shadow: 0 0 1em #888;

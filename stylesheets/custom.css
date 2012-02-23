@@ -13,6 +13,7 @@
   position: absolute;
   left: -3em;
   top: 2.5em;
+  min-width: 165px;
   /* 45 deg ccw rotation */
   -moz-transform: rotate(-45deg);
   -webkit-transform: rotate(-45deg);

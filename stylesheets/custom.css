@@ -7,7 +7,7 @@
 	text-align: center; }
 
 .ribbon {
-  background-color: #205CA1;
+  background-color: #f55;
   overflow: hidden;
   /* top left corner */
   position: absolute;
@@ -24,7 +24,7 @@
   box-shadow: 0 0 1em #888; }
 
 .ribbon-text {
-  border: 1px solid #aaf;
+  border: 1px solid #faa;
   color: #fff;
   display: block;
   font: bold 81.25% 'Helvetiva Neue', Helvetica, Arial, sans-serif;
